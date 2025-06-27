@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeaSwap - Link in Bio</title>
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #19273A;
+            --card-light: #25364C;
+            --card-border: #2D4663;
+            --accent: #0EA5E9;
+            --accent2: #3B82F6;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --text-light: #CBD5E1;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1A2C42;
+            color: #F8FAFC;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Elements */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1A2C42 0%, #2D4663 50%, #1A2C42 100%);
+            z-index: -3;
+        }
+
+        .grid-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(45, 70, 99, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(45, 70, 99, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+        }
+
+        .glow-effect {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, transparent 70%);
+            z-index: -1;
+            animation: glow 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            0% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .hero-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 100px;
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M-5.58,90.03 C150.31,188.61 349.20,-49.98 503.66,92.57 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: %231A2C42;"></path></svg>');
+            background-repeat: no-repeat;
+            background-size: cover;
+            animation: wave-animation 15s linear infinite;
+        }
+
+        .wave-2 {
+            opacity: 0.5;
+            animation-duration: 20s;
+            animation-direction: reverse;
+            bottom: 10px;
+        }
+
+        @keyframes wave-animation {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: #0EA5E9;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            top: 60%;
+            left: 80%;
+            animation-delay: 2s;
+        }
+
+        .particle:nth-child(3) {
+            top: 40%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        .particle:nth-child(4) {
+            top: 80%;
+            left: 60%;
+            animation-delay: 1s;
+        }
+
+        .particle:nth-child(5) {
+            top: 30%;
+            left: 90%;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 28rem;
+            margin: 0 auto;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .profile-image {
+            width: 12rem;
+            height: 12rem;
+            border-radius: 50%;
+            margin: 0 auto 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* background: linear-gradient(135deg, #2D4663, #1E3A5F); */
+            /* border: 2px solid #0EA5E9; */
+            /* box-shadow: 0 0 20px rgba(14, 165, 233, 0.3); */
+        }
+
+        .profile-image img {
+            width: 8rem;
+            height: 8rem;
+        }
+
+        .name {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #F8FAFC;
+        }
+
+        .tagline {
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: #94A3B8;
+        }
+
+        /* Links Section */
+        .links-section {
+            margin-bottom: 2rem;
+        }
+
+        .link-card {
+            background: rgba(45, 70, 99, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid #1E3A5F;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .link-card:hover {
+            transform: translateY(-2px);
+            border-color: #0EA5E9;
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.2);
+        }
+
+        .link-card:nth-child(1) { animation-delay: 0.1s; }
+        .link-card:nth-child(2) { animation-delay: 0.2s; }
+        .link-card:nth-child(3) { animation-delay: 0.3s; }
+        .link-card:nth-child(4) { animation-delay: 0.4s; }
+        .link-card:nth-child(5) { animation-delay: 0.5s; }
+
+        .link-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .link-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .link-icon {
+            color: #0EA5E9;
+            flex-shrink: 0;
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        .link-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .link-title {
+            color: #F8FAFC;
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .link-description {
+            color: #CBD5E1;
+            font-size: 0.875rem;
+            line-height: 1.4;
+        }
+
+        .external-link {
+            color: #94A3B8;
+            flex-shrink: 0;
+            margin-left: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 1.125rem;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #0EA5E9, #3B82F6);
+            color: white;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.6s ease-out 0.6s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            border-top: 1px solid #2D4663;
+            animation: fadeIn 1s ease-out 0.8s both;
+        }
+
+        .footer-content {
+            max-width: 28rem;
+            margin: 0 auto;
+        }
+
+        .footer-text {
+            color: #94A3B8;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-email {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #0EA5E9;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .footer-email:hover {
+            color: #3B82F6;
+        }
+
+        .footer-email svg {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        .footer-copyright {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #2D4663;
+            color: #CBD5E1;
+            font-size: 0.75rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .profile-image {
+                width: 14rem;
+                height: 14rem;
+            }
+            .profile-image img {
+                width: 10rem;
+                height: 10rem;
+            }
+            .name {
+                font-size: 2.25rem;
+            }
+            .tagline {
+                font-size: 1.25rem;
+            }
+        }
+
+        /* Focus styles for accessibility */
+        .link-card:focus {
+            outline: 2px solid #0EA5E9;
+            outline-offset: 2px;
+        }
+
+        .cta-button:focus {
+            outline: 2px solid #0EA5E9;
+            outline-offset: 2px;
+        }
+
+        /* Add particles background layer */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="hero-bg">
+        <div class="wave"></div>
+        <div class="wave wave-2"></div>
+    </div>
+    
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Profile Section -->
+            <header class="profile-section">
+                <!-- Profile Image -->
+                <div class="profile-image">
+                    <img src="LogoTrans.svg" alt="SeaSwap Logo" />
+                </div>
+                
+                <!-- Name -->
+                <h1 class="name">SeaSwap</h1>
+                
+                <!-- Tagline -->
+                <p class="tagline">The First DEX Aggregator on Kaspa Layer 2s</p>
+            </header>
+
+            <!-- Links Section -->
+            <section class="links-section">
+                <!-- Visit Website -->
+                <div class="link-card" onclick="openLink('https://seaswap.xyz')" tabindex="0" role="button" aria-label="Visit SeaSwap website: Dive into SeaSwap the gateway efficient trade on kaspa layer 2s">
+                    <div class="link-content">
+                        <div class="link-left">
+                            <div class="link-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M2 12h20"/>
+                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                                </svg>
+                            </div>
+                            <div class="link-text">
+                                <h3 class="link-title">Website</h3>
+                                <p class="link-description">Dive into SeaSwap the gateway efficient trade on kaspa layer 2s.</p>
+                            </div>
+                        </div>
+                        <svg class="external-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                            <polyline points="15,3 21,3 21,9"/>
+                            <line x1="10" y1="14" x2="21" y2="3"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Join Discord -->
+                <div class="link-card" onclick="openLink('https://discord.gg/qsM9tKRyfB')" tabindex="0" role="button" aria-label="Join SeaSwap Discord: Connect with the core community, dev updates & early alpha access">
+                    <div class="link-content">
+                        <div class="link-left">
+                            <div class="link-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419-.0189 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1568 2.4189Z"/>
+                                </svg>
+                            </div>
+                            <div class="link-text">
+                                <h3 class="link-title">Discord</h3>
+                                <p class="link-description">Connect with the core community, dev updates & early alpha access.</p>
+                            </div>
+                        </div>
+                        <svg class="external-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                            <polyline points="15,3 21,3 21,9"/>
+                            <line x1="10" y1="14" x2="21" y2="3"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Telegram -->
+                <div class="link-card" onclick="openLink('https://t.me/SeaSwapAgg')" tabindex="0" role="button" aria-label="Join SeaSwap Telegram: Get quick updates and join discussions on the go">
+                    <div class="link-content">
+                        <div class="link-left">
+                            <div class="link-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 2L11 13"/>
+                                    <polygon points="22,2 15,22 11,13 2,9"/>
+                                </svg>
+                            </div>
+                            <div class="link-text">
+                                <h3 class="link-title">Telegram</h3>
+                                <p class="link-description">Get quick updates and join discussions on the go.</p>
+                            </div>
+                        </div>
+                        <svg class="external-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                            <polyline points="15,3 21,3 21,9"/>
+                            <line x1="10" y1="14" x2="21" y2="3"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- X (Twitter) -->
+                <div class="link-card" onclick="openLink('https://x.com/SeaSwapXYZ')" tabindex="0" role="button" aria-label="Follow SeaSwap on X: Follow us for news, drops, dev threads & ecosystem alpha">
+                    <div class="link-content">
+                        <div class="link-left">
+                            <div class="link-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                                </svg>
+                            </div>
+                            <div class="link-text">
+                                <h3 class="link-title">X</h3>
+                                <p class="link-description">Follow us for news, drops, dev threads & ecosystem alpha.</p>
+                            </div>
+                        </div>
+                        <svg class="external-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                            <polyline points="15,3 21,3 21,9"/>
+                            <line x1="10" y1="14" x2="21" y2="3"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- GitBook -->
+                <div class="link-card" onclick="openLink('https://dors-organization-1.gitbook.io/public-docs')" tabindex="0" role="button" aria-label="Read SeaSwap documentation: Explore the docs from integration to routing logic">
+                    <div class="link-content">
+                        <div class="link-left">
+                            <div class="link-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M10.802 17.77a.703.703 0 1 1-.002 1.406.703.703 0 0 1 .002-1.406m11.024-4.347a.703.703 0 1 1 .001-1.406.703.703 0 0 1-.001 1.406m0-2.876a2.176 2.176 0 0 0-2.174 2.174c0 .233.039.465.115.691l-7.181 3.823a2.165 2.165 0 0 0-1.784-.937c-.829 0-1.584.475-1.95 1.216l-6.451-3.402c-.682-.358-1.192-1.48-1.138-2.502.028-.533.212-.947.493-1.107.178-.1.392-.092.62.027l.042.023c1.71.9 7.304 3.847 7.54 3.956.363.169.565.237 1.185-.057l11.564-6.014c.17-.064.368-.227.368-.474 0-.342-.354-.477-.355-.477-.658-.315-1.669-.788-2.655-1.25-2.108-.987-4.497-2.105-5.546-2.655-.906-.474-1.635-.074-1.765.006l-.252.125C7.78 6.048 1.46 9.178 1.1 9.397.457 9.789.058 10.57.006 11.539c-.08 1.537.703 3.14 1.824 3.727l6.822 3.518a2.175 2.175 0 0 0 2.15 1.862 2.177 2.177 0 0 0 2.173-2.14l7.514-4.073c.38.298.853.461 1.337.461A2.176 2.176 0 0 0 24 12.72a2.176 2.176 0 0 0-2.174-2.174"/>
+                                </svg>
+                            </div>
+                            <div class="link-text">
+                                <h3 class="link-title">GitBook</h3>
+                                <p class="link-description">Explore the docs from integration to routing logic.</p>
+                            </div>
+                        </div>
+                        <svg class="external-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                            <polyline points="15,3 21,3 21,9"/>
+                            <line x1="10" y1="14" x2="21" y2="3"/>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Call-to-Action Button -->
+            <button class="cta-button" onclick="openLink('https://seaswap.xyz')" aria-label="Get started with SeaSwap">
+                Get Started
+            </button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p class="footer-text">Questions? Get in touch</p>
+            <a href="mailto:Support@seaswap.xyz" class="footer-email" aria-label="Send email to SeaSwap team">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+                <span>Support@seaswap.xyz</span>
+            </a>
+            
+            <div class="footer-copyright">
+                <p>© 2025 SeaSwap.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Function to open links in new tab
+        function openLink(url) {
+            window.open(url, '_blank', 'noopener,noreferrer');
+        }
+
+        // Add keyboard navigation support
+        document.addEventListener('DOMContentLoaded', function() {
+            const linkCards = document.querySelectorAll('.link-card');
+            
+            linkCards.forEach(card => {
+                card.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        card.click();
+                    }
+                });
+            });
+
+            // Add click sound effect (optional)
+            const ctaButton = document.querySelector('.cta-button');
+            ctaButton.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    ctaButton.click();
+                }
+            });
+
+            // Initialize particles.js
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": { "value": 40, "density": { "enable": true, "value_area": 800 } },
+                    "color": { "value": "#0EA5E9" },
+                    "shape": { "type": "circle", "stroke": { "width": 0, "color": "#000000" }, "polygon": { "nb_sides": 5 } },
+                    "opacity": { "value": 0.3, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
+                    "size": { "value": 2, "random": true, "anim": { "enable": false, "speed": 40, "size_min": 0.1, "sync": false } },
+                    "line_linked": { "enable": true, "distance": 150, "color": "#2D4663", "opacity": 0.3, "width": 1 },
+                    "move": { "enable": true, "speed": 1.5, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false, "attract": { "enable": false, "rotateX": 600, "rotateY": 1200 } }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+                    "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 1 } }, "bubble": { "distance": 400, "size": 40, "duration": 2, "opacity": 8, "speed": 3 }, "repulse": { "distance": 200, "duration": 0.4 }, "push": { "particles_nb": 4 }, "remove": { "particles_nb": 2 } }
+                },
+                "retina_detect": true
+            });
+        });
+    </script>
+</body>
+</html> 
