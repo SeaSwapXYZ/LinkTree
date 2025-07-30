@@ -244,6 +244,25 @@
         .link-card:nth-child(3) { animation-delay: 0.3s; }
         .link-card:nth-child(4) { animation-delay: 0.4s; }
         .link-card:nth-child(5) { animation-delay: 0.5s; }
+        .link-card:nth-child(6) { animation-delay: 0.6s; }
+
+        /* Special animation for Start Trading button */
+        .link-card:first-child {
+            background: linear-gradient(135deg, rgba(45, 70, 99, 0.9), rgba(14, 165, 233, 0.1));
+            border: 2px solid #0EA5E9;
+            animation: swapPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes swapPulse {
+            0%, 100% { 
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(14, 165, 233, 0.2);
+            }
+            50% { 
+                transform: translateY(-4px);
+                box-shadow: 0 12px 35px rgba(14, 165, 233, 0.4);
+            }
+        }
 
         .link-content {
             display: flex;
@@ -442,6 +461,54 @@
 
             <!-- Links Section -->
             <section class="links-section">
+                <!-- Start Trading Button -->
+                <div class="link-card" onclick="openLink('https://testnet.seaswap.xyz')" tabindex="0" role="button" aria-label="Start Trading: Trade on SeaSwap DEX aggregator">
+                    <div class="link-content">
+                        <div class="link-left">
+                            <div class="link-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+                                </svg>
+                            </div>
+                            <div class="link-text">
+                                <h3 class="link-title">Start Trading</h3>
+                                <p class="link-description">Trade on the first DEX aggregator for Kaspa Layer 2s</p>
+                            </div>
+                        </div>
+                        <svg class="external-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                            <polyline points="15,3 21,3 21,9"/>
+                            <line x1="10" y1="14" x2="21" y2="3"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- API Documentation -->
+                <div class="link-card" onclick="openLink('https://testnet.seaswap.xyz/docs/api/v1/index.html')" tabindex="0" role="button" aria-label="SeaSwap API Docs: Explore our Swagger documentation for developers">
+                    <div class="link-content">
+                        <div class="link-left">
+                            <div class="link-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14,2 14,8 20,8"/>
+                                    <line x1="16" y1="13" x2="8" y2="13"/>
+                                    <line x1="16" y1="17" x2="8" y2="17"/>
+                                    <polyline points="10,9 9,9 8,9"/>
+                                </svg>
+                            </div>
+                            <div class="link-text">
+                                <h3 class="link-title">API Documentation</h3>
+                                <p class="link-description">Explore our Swagger documentation for developers.</p>
+                            </div>
+                        </div>
+                        <svg class="external-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                            <polyline points="15,3 21,3 21,9"/>
+                            <line x1="10" y1="14" x2="21" y2="3"/>
+                        </svg>
+                    </div>
+                </div>
+
                 <!-- Visit Website -->
                 <div class="link-card" onclick="openLink('https://seaswap.xyz')" tabindex="0" role="button" aria-label="Visit SeaSwap website: Dive into SeaSwap the gateway efficient trade on kaspa layer 2s">
                     <div class="link-content">
@@ -543,7 +610,7 @@
                                 </svg>
                             </div>
                             <div class="link-text">
-                                <h3 class="link-title">GitBook</h3>
+                                <h3 class="link-title">Documentation</h3>
                                 <p class="link-description">Explore the docs from integration to routing logic.</p>
                             </div>
                         </div>
@@ -557,8 +624,8 @@
             </section>
 
             <!-- Call-to-Action Button -->
-            <button class="cta-button" onclick="openLink('https://seaswap.xyz')" aria-label="Get started with SeaSwap">
-                Get Started
+            <button class="cta-button" onclick="openLink('https://testnet.seaswap.xyz')" aria-label="Start trading on SeaSwap">
+                Start Trading
             </button>
         </div>
     </main>
